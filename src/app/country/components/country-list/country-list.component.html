@@ -11,14 +11,25 @@
       </tr>
     </thead>
     <tbody>
+      @for (country of countries(); track country.cca2; let index = $index) {
       <tr>
-        <td>1</td>
-        <td>icono</td>
-        <td>bandera</td>
-        <td>nombre</td>
-        <td>capital</td>
-        <td>población</td>
+        <td class="text-center">{{ index + 1 }}</td>
+        <td class="text-center">
+          <img src="{{ country.flag }}" alt="Flag of {{ country.name }}" class="w-10 m-auto">
+        </td>
+        <td class="text-center">
+          <img src="{{ country.flagSvg }}" alt="Flag of {{ country.name }}" class="w-10 m-auto">
+        </td>
+        <td class="text-center">{{ country.name }}</td>
+        <td class="text-center">{{ country.capital }}</td>
+        <td class="text-center">{{ country.population }}</td>
+        <td class="text-center">
+          <a class="link-primary cursor-pointer">Más información</a>
+        </td>
       </tr>
+      }
+
+    </tbody>
 
   </table>
 

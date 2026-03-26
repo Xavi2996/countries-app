@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CountrySearchComponent } from '../../components/country-search/country-search.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
+import { CountryService } from '../../services/country.service';
+import { RestCountry } from '../../interfaces/rest.countries.interfaces';
+import { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-by-capital-page',
@@ -9,7 +12,30 @@ import { CountryListComponent } from '../../components/country-list/country-list
   styleUrl: './by-capital-page.component.css',
 })
 export class ByCapitalPageComponent {
-  onSearch(event: string) {
-    console.log(event);
+  private countryService = inject(CountryService);
+
+  isLoading = signal(false);
+  isError = signal<string | null>(null);
+  countries = signal<Country[]>([]);
+
+  onSearch(query: string) {
+    if (this.isLoading()) return;
+
+    this.isLoading.set(true);
+    this.isError.set(null);
+
+    this.countryService.searchByCapital(query).subscribe({
+      next: (countries) => {
+        console.log(countries);
+        this.countries.set(countries);
+      },
+      error: (error) => {
+        console.error(error);
+        this.isError.set('Failed to fetch countries.');
+      },
+      complete: () => {
+        this.isLoading.set(false);
+      },
+    });
   }
 }
