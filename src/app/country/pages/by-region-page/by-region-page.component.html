@@ -1,1 +1,10 @@
-<p>by-region-page works!</p>
+<div class="flex gap-2 flex-wrap mb-2">
+  @for (region of regions; track $index) {
+  <button class="btn" (click)="regionValue.set(region)" [class.btn-primary]="regionValue() === region">
+    {{ region }}
+  </button>
+  }
+</div>
+
+<country-list [countries]="regionResource.value() ?? []" [errorMessage]="regionResource.error()"
+  [isEmpty]="regionResource.value()?.length === 0" [isLoading]="regionResource.isLoading()"></country-list>

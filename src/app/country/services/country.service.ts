@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RestCountry } from '../interfaces/rest.countries.interfaces';
-import { catchError, count, delay, map, of, tap, throwError } from 'rxjs';
+import { catchError, map, of, tap, throwError } from 'rxjs';
 import { CountryMapper } from '../mapper/country.mapper';
 import { Country } from '../interfaces/country.interface';
 
@@ -13,7 +13,8 @@ const API_URL = 'https://restcountries.com/v3.1';
 export class CountryService {
   private httpClient = inject(HttpClient);
   private queryCacheCapital = new Map<string, Country[]>(); //Se crea un cache para almacenar los resultados de las consultas por capital yipo clave-valor, donde la clave es la consulta y el valor es el resultado de la consulta (un array de países)
-  private queryCacheCountry = new Map<string, Country[]>(); //Se crea un cache para almacenar los resultados de las consultas por país yipo clave-valor, donde la clave es la consulta y el valor es el resultado de la consulta (un array de países)
+  private queryCacheCountry = new Map<string, Country[]>();
+  private queryCacheRegion = new Map<string, Country[]>();
 
   searchByCapital(query: string) {
     query = query.trim().toLowerCase();
@@ -74,6 +75,39 @@ export class CountryService {
         );
       }),
     );
+  }
+
+  searchByRegion(region: string) {
+    region = region.trim().toLowerCase();
+
+    if (this.queryCacheRegion.has(region)) {
+      console.log(this.queryCacheRegion);
+      console.log(this.queryCacheRegion.get(region));
+      return of(this.queryCacheRegion.get(region) ?? []); //regresa el array del pais
+    }
+
+    console.log('Se va a consumir el servicio para traer por pais');
+
+    return this.httpClient
+      .get<RestCountry[]>(`${API_URL}/region/${region}`)
+      .pipe(
+        map((countries) => {
+          if (!countries || countries.length === 0) {
+            throw new Error('No countries found');
+          }
+          return CountryMapper.fromRestCountriesToCountries(countries);
+        }),
+        tap((countries) => this.queryCacheCountry.set(region, countries)),
+        // delay(1000),
+        catchError((error) => {
+          return throwError(
+            () =>
+              new Error(
+                'No se pudo encontraron regiones con el nombre: ' + region,
+              ),
+          );
+        }),
+      );
   }
 
   searchByAlphaCode(code: string) {
