@@ -1,0 +1,80 @@
+<section class="mx-10 my-8">
+  <div
+    class="bg-slate-800 rounded-2xl shadow-lg border border-slate-700 p-8 mb-8"
+  >
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+    >
+      <div class="flex items-center gap-5">
+        <img
+          [src]="country().flagSvg"
+          [alt]="'Bandera de ' + country().name"
+          class="w-24 h-16 object-cover rounded-lg shadow-md border border-slate-600"
+        />
+
+        <div>
+          <h1 class="text-4xl font-bold text-slate-100 mb-2">
+            {{ country().name }}
+          </h1>
+          <p class="text-lg text-slate-400">
+            Capital:
+            <span class="font-medium text-slate-200">{{
+              country().capital
+            }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="text-6xl opacity-90">
+        {{ country().flag }}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm">
+      <p class="text-sm text-slate-400 mb-1">Nombre del país</p>
+      <p class="text-2xl font-semibold text-slate-100">
+        {{ country().name }}
+      </p>
+    </div>
+
+    <div class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm">
+      <p class="text-sm text-slate-400 mb-1">Capital</p>
+      <p class="text-2xl font-semibold text-slate-100">
+        {{ country().capital }}
+      </p>
+    </div>
+
+    <div class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm">
+      <p class="text-sm text-slate-400 mb-1">Población</p>
+      <p class="text-2xl font-semibold text-slate-100">
+        {{ country().population | number }}
+      </p>
+    </div>
+
+    <div class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm">
+      <p class="text-sm text-slate-400 mb-1">Código</p>
+      <p class="text-2xl font-semibold text-slate-100">
+        {{ country().cca2 }}
+      </p>
+    </div>
+
+    <div class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm">
+      <p class="text-sm text-slate-400 mb-1">Bandera emoji</p>
+      <p class="text-4xl">
+        {{ country().flag }}
+      </p>
+    </div>
+
+    <div
+      class="bg-slate-800 border border-slate-700 p-5 rounded-2xl shadow-sm flex items-center justify-center"
+    >
+      <img
+        [src]="country().flagSvg"
+        [alt]="'Bandera de ' + country().name"
+        class="w-28 h-20 object-cover rounded-md border border-slate-600"
+      />
+    </div>
+  </div>
+</section>

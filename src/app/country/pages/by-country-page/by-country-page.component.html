@@ -4,11 +4,14 @@
 ></country-search>
 
 <div>
-  @if (countryResource.hasValue()) {
-    <country-list [countries]="countryResource.value()!"></country-list>
-  }
+  <country-list
+    [countries]="countryResource.value() ?? []"
+    [errorMessage]="countryResource.error()"
+    [isEmpty]="countryResource.value()?.length === 0"
+    [isLoading]="countryResource.isLoading()"
+  ></country-list>
 
-  @if (countryResource.isLoading()) {
+  <!-- @if (countryResource.isLoading()) {
     <div class="spinner">Cargando países...</div>
   }
 
@@ -16,5 +19,5 @@
     <div class="alert alert-danger mt-3">
       {{ countryResource.error() }}
     </div>
-  }
+  } -->
 </div>

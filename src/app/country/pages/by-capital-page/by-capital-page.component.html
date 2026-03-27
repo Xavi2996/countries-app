@@ -6,17 +6,10 @@
 </div>
 
 <div>
-  @if (countryResource.hasValue()) {
-    <country-list [countries]="countryResource.value()!"></country-list>
-  }
-
-  @if (countryResource.isLoading()) {
-    <div class="spinner">Cargando países...</div>
-  }
-
-  @if (countryResource.error()) {
-    <div class="alert alert-danger mt-3">
-      {{ countryResource.error() }}
-    </div>
-  }
+  <country-list
+    [countries]="countryResource.value() ?? []"
+    [errorMessage]="countryResource.error()"
+    [isEmpty]="countryResource.value()?.length === 0"
+    [isLoading]="countryResource.isLoading()"
+  ></country-list>
 </div>
