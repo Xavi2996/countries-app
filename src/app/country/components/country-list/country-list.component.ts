@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { RestCountry } from '../../interfaces/rest.countries.interfaces';
 import { Country } from '../../interfaces/country.interface';
 import { DecimalPipe } from '@angular/common';
 

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CountrySearchComponent } from '../../components/country-search/country-search.component';
-import { CountryListComponent } from '../../components/country-list/country-list.component';
 
 @Component({
   selector: 'by-country-page',
-  imports: [CountrySearchComponent, CountryListComponent],
+  imports: [CountrySearchComponent],
   templateUrl: './by-country-page.component.html',
   styleUrl: './by-country-page.component.css',
 })
