@@ -35,5 +35,22 @@ export class CountryService {
       );
   }
 
-  constructor() {}
+  searchByCountry(query: string) {
+    query = query.trim().toLowerCase();
+
+    return this.httpClient.get<RestCountry[]>(`${API_URL}/name/${query}`).pipe(
+      map((countries) => {
+        if (!countries || countries.length === 0) {
+          throw new Error('No countries found');
+        }
+        return CountryMapper.fromRestCountriesToCountries(countries);
+      }),
+      catchError((error) => {
+        return throwError(
+          () =>
+            new Error('No se pudo encontrar países con el nombre: ' + query),
+        );
+      }),
+    );
+  }
 }

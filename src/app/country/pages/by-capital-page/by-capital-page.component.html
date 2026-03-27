@@ -1,23 +1,22 @@
 <div>
-  <country-search (searchValue)="query.set($event)" [placehoder]="'Buscar por capital...'"></country-search>
+  <country-search
+    (searchValue)="query.set($event)"
+    [placehoder]="'Buscar por capital...'"
+  ></country-search>
 </div>
-<div>
 
-  @if(countryResource.hasValue()){
-  <country-list [countries]="countryResource.value()!"></country-list>
+<div>
+  @if (countryResource.hasValue()) {
+    <country-list [countries]="countryResource.value()!"></country-list>
   }
 
-
-
   @if (countryResource.isLoading()) {
-  <div class="spinner">
-    Cargando países...
-  </div>
+    <div class="spinner">Cargando países...</div>
   }
 
   @if (countryResource.error()) {
-  <div class="alert alert-danger mt-3">
-    {{ countryResource.error() }}
-  </div>
+    <div class="alert alert-danger mt-3">
+      {{ countryResource.error() }}
+    </div>
   }
 </div>
