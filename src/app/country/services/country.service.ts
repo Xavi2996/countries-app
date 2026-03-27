@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RestCountry } from '../interfaces/rest.countries.interfaces';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { CountryMapper } from '../mapper/country.mapper';
 
 const API_URL = 'https://restcountries.com/v3.1';
@@ -23,6 +23,14 @@ export class CountryService {
             throw new Error('No countries found');
           }
           return CountryMapper.fromRestCountriesToCountries(countries);
+        }),
+        catchError((error) => {
+          return throwError(
+            () =>
+              new Error(
+                'No se pudo encontrar países para la capital: ' + query,
+              ),
+          );
         }),
       );
   }

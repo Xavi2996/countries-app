@@ -30,8 +30,11 @@ export class ByCapitalPageComponent {
         this.countries.set(countries);
       },
       error: (error) => {
-        console.error(error);
-        this.isError.set('Failed to fetch countries.');
+        console.log(error);
+
+        this.isLoading.set(false);
+        this.countries.set([]);
+        this.isError.set(error);
       },
       complete: () => {
         this.isLoading.set(false);

@@ -3,4 +3,10 @@
 </div>
 <div>
   <country-list [countries]="countries()"></country-list>
+
+  @if (isError()) {
+  <div class="alert alert-danger mt-3">
+    {{ isError() }}
+  </div>
+  }
 </div>

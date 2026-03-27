@@ -15,14 +15,16 @@
       <tr>
         <td class="text-center">{{ index + 1 }}</td>
         <td class="text-center">
-          <img src="{{ country.flag }}" alt="Flag of {{ country.name }}" class="w-10 m-auto">
+          {{ country.flag }}
         </td>
         <td class="text-center">
           <img src="{{ country.flagSvg }}" alt="Flag of {{ country.name }}" class="w-10 m-auto">
         </td>
         <td class="text-center">{{ country.name }}</td>
         <td class="text-center">{{ country.capital }}</td>
-        <td class="text-center">{{ country.population }}</td>
+        <td>
+          <span class="badge badge-secondary">{{ country.population | number }}</span>
+        </td>
         <td class="text-center">
           <a class="link-primary cursor-pointer">Más información</a>
         </td>
