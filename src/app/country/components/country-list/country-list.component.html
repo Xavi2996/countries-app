@@ -51,7 +51,7 @@
       }
 
       <!--  -->
-      @if (countries.length === 0 && !isLoading() && !errorMessage()) {
+      @if (countries().length === 0 && !isLoading() && !errorMessage()) {
         <tr>
           <td colspan="6" class="text-center">No se encontraron países</td>
         </tr>
