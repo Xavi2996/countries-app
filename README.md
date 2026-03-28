@@ -1,59 +1,108 @@
 # CountryApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Aplicación web desarrollada con Angular que consume una API de países para explorar información por ciudad, país o región, enfocada en rendimiento, buenas prácticas modernas y experiencia de usuario.
 
-## Development server
+--------------------------------------------------
 
-To start a local development server, run:
+Descripción
 
-```bash
+Esta aplicación permite buscar y explorar información de países de forma dinámica.
+Implementa Angular moderno con Signals, manejo de estado eficiente y optimización de llamadas a servicios.
+
+El proyecto está diseñado para demostrar:
+
+- Arquitectura limpia en Angular
+- Uso de Signals (signal, computed, linkedSignal)
+- Manejo de rutas dinámicas y query params
+- Optimización de performance con cache
+- UI moderna con Tailwind + DaisyUI
+
+--------------------------------------------------
+
+Tecnologías
+
+- Angular (Signals API)
+- TypeScript
+- TailwindCSS
+- DaisyUI
+- RxJS (cuando aplica)
+- API de países (ej: REST Countries)
+
+--------------------------------------------------
+
+Funcionalidades
+
+- Búsqueda por:
+  - País
+  - Ciudad
+  - Región
+
+- Navegación con rutas dinámicas
+- Manejo de query params en URL
+- Cache de llamadas a la API (evita requests innecesarios)
+- Estado reactivo con Signals
+- UI moderna y limpia con DaisyUI
+- Responsive (en progreso)
+
+--------------------------------------------------
+
+Arquitectura & Buenas prácticas
+
+- Separación clara:
+  - Services (consumo API + cache)
+  - Components (UI)
+  - Signals para estado reactivo
+
+- Uso de:
+  - signal() → estado base
+  - computed() → valores derivados
+  - linkedSignal() → estado derivado editable
+
+- Manejo eficiente de cambios sin necesidad de patrones pesados
+- Navegación basada en rutas con parámetros dinámicos
+
+--------------------------------------------------
+
+Optimización
+
+- Cache de respuestas HTTP para evitar llamadas repetidas
+- Uso de Signals para minimizar renders innecesarios
+- Lazy evaluation con computed
+
+--------------------------------------------------
+
+Estructura del proyecto
+
+src/
+ ├── app/
+ │   ├── components/
+ │   ├── pages/
+ │   ├── services/
+ │   ├── interfaces/
+ │   ├── routes/
+ │   └── Mapper
+
+--------------------------------------------------
+
+Instalación
+
+git clone https://github.com/Xavi2996/countries-app.git
+npm install
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+--------------------------------------------------
 
-## Code scaffolding
+Estado del proyecto
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Funcionalidad principal completa
+- Responsive en progreso
+- Posibles mejoras futuras:
+  - Tests unitarios
+  - Mejoras de UX
 
-```bash
-ng generate component component-name
-```
+--------------------------------------------------
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Autor
 
-```bash
-ng generate --help
-```
+Desarrollado por Xavier Cobos
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
